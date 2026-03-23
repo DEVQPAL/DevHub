@@ -3,8 +3,7 @@ local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
-local DevHub = {}
-
+local DevHub = {} -- Eto ang main table mo
 
 local function MakeDraggable(UI)
     local dragging, dragInput, dragStart, startPos
@@ -28,25 +27,24 @@ local function MakeDraggable(UI)
     end)
 end
 
-function Lancelot:CreateWindow(hubName)
+-- DAPAT 'DevHub' din ito, hindi 'Lancelot'
+function DevHub:CreateWindow(hubName)
     local ScreenGui = Instance.new("ScreenGui", Player.PlayerGui)
-    ScreenGui.Name = "LancelotLibrary"
+    ScreenGui.Name = "DevHubLibrary"
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    
     local ToggleBtn = Instance.new("TextButton", ScreenGui)
-    ToggleBtn.Size = UDim2.new(0, 50, 0, 50)
+    ToggleBtn.Size = UDim2.new(0, 60, 0, 60)
     ToggleBtn.Position = UDim2.new(0, 20, 0, 20)
     ToggleBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
     ToggleBtn.Text = "DEVS"
     ToggleBtn.TextColor3 = Color3.fromRGB(0, 200, 255)
     ToggleBtn.Font = Enum.Font.GothamBold
-    ToggleBtn.TextSize = 20
+    ToggleBtn.TextSize = 16
     Instance.new("UICorner", ToggleBtn).CornerRadius = UDim.new(1, 0)
     Instance.new("UIStroke", ToggleBtn).Color = Color3.fromRGB(0, 200, 255)
     MakeDraggable(ToggleBtn)
 
-    
     local MainFrame = Instance.new("Frame", ScreenGui)
     MainFrame.Size = UDim2.new(0, 550, 0, 350)
     MainFrame.Position = UDim2.new(0.5, -275, 0.5, -175)
@@ -55,7 +53,6 @@ function Lancelot:CreateWindow(hubName)
     Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 10)
     MakeDraggable(MainFrame)
 
-    
     local Sidebar = Instance.new("Frame", MainFrame)
     Sidebar.Size = UDim2.new(0, 140, 1, -20)
     Sidebar.Position = UDim2.new(0, 10, 0, 10)
@@ -70,7 +67,6 @@ function Lancelot:CreateWindow(hubName)
     local TabLayout = Instance.new("UIListLayout", TabContainer)
     TabLayout.Padding = UDim.new(0, 8)
 
-    
     local PageHolder = Instance.new("Frame", MainFrame)
     PageHolder.Size = UDim2.new(1, -170, 1, -20)
     PageHolder.Position = UDim2.new(0, 160, 0, 10)
@@ -108,7 +104,6 @@ function Lancelot:CreateWindow(hubName)
 
         local Elements = {}
 
-        
         function Elements:CreateButton(txt, cb)
             local b = Instance.new("TextButton", Page)
             b.Size = UDim2.new(1, -10, 0, 38)
@@ -119,7 +114,6 @@ function Lancelot:CreateWindow(hubName)
             b.MouseButton1Click:Connect(function() task.spawn(cb) end)
         end
 
-        
         function Elements:CreateToggle(txt, def, cb)
             local s = def
             local t = Instance.new("TextButton", Page)
@@ -137,7 +131,6 @@ function Lancelot:CreateWindow(hubName)
             end)
         end
 
-        
         function Elements:CreateSlider(txt, min, max, def, cb)
             local f = Instance.new("Frame", Page); f.Size = UDim2.new(1,-10,0,45); f.BackgroundColor3 = Color3.fromRGB(35,35,40)
             Instance.new("UICorner", f)
@@ -163,4 +156,4 @@ function Lancelot:CreateWindow(hubName)
     return TabLib
 end
 
-return DevHub
+return DevHub -- Mahalaga na parehas sa 'local DevHub = {}'
